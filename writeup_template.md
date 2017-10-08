@@ -76,7 +76,13 @@ Here's a [link to my video result](./project_video.mp4)
 
 I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
-Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
+Here's an example result showing the original image, created boxes from the classifier, heatmap from a video frame, and the result of `scipy.ndimage.measurements.label()` overlaid on the frame:
+
+<img src="./output_images/Pipeline_images.png" width="600" alt="Combined Image" />
+
+I also showed the results of finding the car boxes from this pipeline in the following:
+
+Finally in the cell ?, I implemented the pipeline for processing the video frames using the described method. I also added a variable that keeps the found veheicle boxes in the `n=29`previous frames and adds the boxes in the current frame to it. The final locations of the veheicle in the current frames is the average over all current and previous frames.   
 
 ### Here are six frames and their corresponding heatmaps:
 
@@ -89,11 +95,16 @@ Here's an example result showing the heatmap from a series of frames of video, t
 ![alt text][image7]
 
 
-
 ---
 
 ###Discussion
 
 ####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.
+In this project I used SVM classifier and HOG, Spatial binning and color histogram features of an image to determine the position vehecles (if any) in the image. 
+
+The first challange for this project was to choose the best comination of features and the specific parameters used (such as color space, HOG parameters, SVM C parameter and etc.). I spend lots of time choosing the best comibnation. Automizing the decision (gridsearch) between all parameters could be very computationaly expensive, so I chose a few parameters to do the grid search. This could be extended to other parametrs as well for the best classiifcation results. 
+
+The second challange was the sliding window search and threshholding as it is fundamentally affecting the results. Using large windows could not localize the smaller veheicles and using smalle windows could be computationally expencive and may not classify the larger vehecles. So, there should be a balance and correct locations for these windows for the best results with minimum computation. Also thresholding the number of hot pixels could afect the results directly. The decision in this section for 'good'/'bad' classifcation and localization of veheicles was visually and by looking at the output video. To optimize the hyper parameters (sliding boxes locations and scales, theresholds) in this section it would be nice to use some training videos with known veheicle boxes in each frame. Then by defining an error function we can find the comibation of hyper parametrs that minmize the error function. 
+
+Finally, to continue this project, instead of SVM classifer I would use Convolutional Neural Netwoek as was explained in this projet [here](https://github.com/antevis/CarND-Project5-Vehicle_Detection_and_Tracking). CNNs could not only classify the veheicles in an image but also, localize the hot pixels related to the veheicls with better accuracy compared to SVM. This could greatly increase the performance of the algorithm.  
