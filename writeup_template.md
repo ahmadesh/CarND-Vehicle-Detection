@@ -52,15 +52,18 @@ The data are then split into training and test sets with 80% to 20% ratio. For t
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
+I used a slidng window function in cell 9 of the code that takes the image along with `ystart, ystop, xstart, xstop, scale, cells_per_step` parameters to search for the car in that subimage using the SVM calssifier. I experimented with the sliding window on the image at different scales and locations on a sample image. The final windows that I setteled down are shown in the following:
 
-![alt text][image3]
+<img src="./output_images/MultiScale_boxes.png" width="600" alt="Combined Image" />
+
+I only search for vehecles in the lower section of the image. The search boxes are composed of 3 scales of `1.25, 2, 3`. The biger booxes with `2,3` scales are distributed on the two sides of the image as the large scale cars can only be found at these locations. The smaller scale `1.25` boxes are distribute over the length of the image. 
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+Ultimately I searched on 3 scales using YUV 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
-![alt text][image4]
+<img src="./output_images/Sample_cars_detection.png" width="600" alt="Combined Image" />
+
 ---
 
 ### Video Implementation
