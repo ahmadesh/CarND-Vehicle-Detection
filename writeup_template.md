@@ -1,7 +1,7 @@
 
-**Vehicle Detection Project**
+# Vehicle Detection Project
 
-<img src="./output_images/First_image.png" width="600" alt="Combined Image" align="center" />
+<img align="center" src="./output_images/First_image.png" width="600" alt="Combined Image"  />
 
 ---
 
