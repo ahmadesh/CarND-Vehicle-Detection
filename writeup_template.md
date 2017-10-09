@@ -1,7 +1,7 @@
 
 **Vehicle Detection Project**
 
-<img src="./output_images/First_image.png" width="600" alt="Combined Image" />
+<img src="./output_images/First_image.png" width="600" alt="Combined Image" align="center" />
 
 ---
 
@@ -14,21 +14,21 @@ The goals / steps of this project are the following:
 * Estimate a bounding box for vehicles detected.
 
 ---
-###Writeup / README
+### Writeup / README
 
-####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. 
+#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. 
 
 You're reading it!
 
-###Reviewing the impo
+### Reviewing the impo
 
 For training the classification between veheicles and non-vehecles, I used the Udacity's labeled datasets available [here](https://github.com/udacity/self-driving-car/tree/master/annotations). Here are the examples of the images available in the data set.
 
 <img src="./output_images/Samples.png" width="600" alt="Combined Image" />
 
-###Histogram of Oriented Gradients (HOG)
+### Histogram of Oriented Gradients (HOG)
 
-####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+#### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
 The code for this step is contained in the cells 4,5 of the IPython notebook file [here](https://github.com/ahmadesh/CarND-Vehicle-Detection/blob/master/Project.ipynb). I created a function for getting the images and output the HOG feature image. I explored different different `skimage.hog()` parameters and I ended up by using (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like. Here is an example using the gray color space input and HOG parameters of `orientations=11`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
