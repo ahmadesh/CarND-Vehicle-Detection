@@ -1,6 +1,10 @@
 
 **Vehicle Detection Project**
 
+<img src="./output_images/First_image.png" width="600" alt="Combined Image" />
+
+---
+
 The goals / steps of this project are the following:
 
 * Perform a Histogram of Oriented Gradients (HOG) feature extraction on a labeled training set of images and train a classifier Linear SVM classifier
@@ -26,14 +30,13 @@ For training the classification between veheicles and non-vehecles, I used the U
 
 ####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
-The code for this step is contained in the cells 4,5 of the IPython notebook.  I created a function for getting the images and output the HOG feature image. I explored different color spaces and different `skimage.hog()` parameters and I ended up by using (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like. Here is an example using the `YUV` color space and HOG parameters of `orientations=11`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
+The code for this step is contained in the cells 4,5 of the IPython notebook.  I created a function for getting the images and output the HOG feature image. I explored different color spaces and different `skimage.hog()` parameters and I ended up by using (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like. Here is an example using the gray color space input and HOG parameters of `orientations=11`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
 <img src="./output_images/HOG_example.png" width="600" alt="Combined Image" />
 
-
 ####2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and chose the HOG parameters that provided the maximum prediction accuracy on the test-set.
+I tried various combinations of parameters and chose the HOG parameters that provided the maximum prediction accuracy on the test-set after training.
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
@@ -74,26 +77,15 @@ Here's a [link to my video result](./project_video.mp4)
 
 ####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+I recorded the positions of positive detections in each frame of the video. From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
-Here's an example result showing the original image, created boxes from the classifier, heatmap from a video frame, and the result of `scipy.ndimage.measurements.label()` overlaid on the frame:
+Here are six frames and their corresponding heatmaps, output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames and the resulting bounding boxes on the original frame.
 
 <img src="./output_images/Pipeline_images.png" width="600" alt="Combined Image" />
 
-I also showed the results of finding the car boxes from this pipeline in the following:
+Finally in the cell ?, I implemented the pipeline for processing the video frames using the described steps. I also added a list variable that keeps the found veheicle boxes in the `n=30`previous frames and adds the boxes in the current frame to it. The final heatmap of the frame is calculated as the summation over last `30` heatmaps. The thresholde for filtering this heatmap is considered proportional with the number of frames. Also, I created a LaneFinder class from the previous project that finds and draws the area between the lanes on the image. I used this class to fill the area between the two lanes. Here is the final image output for the video images:
 
-Finally in the cell ?, I implemented the pipeline for processing the video frames using the described method. I also added a variable that keeps the found veheicle boxes in the `n=29`previous frames and adds the boxes in the current frame to it. The final locations of the veheicle in the current frames is the average over all current and previous frames.   
-
-### Here are six frames and their corresponding heatmaps:
-
-![alt text][image5]
-
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
-
-### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
-
+<img src="./output_images/Final_output.png" width="600" alt="Combined Image" />
 
 ---
 
