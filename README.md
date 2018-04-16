@@ -14,7 +14,7 @@ The goals / steps of this project are the following:
 * Run pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
 * Estimate a bounding box for vehicles detected.
 
-Please find the IPython notebook file for this project [here](https://github.com/ahmadesh/CarND-Vehicle-Detection/blob/master/Project.ipynb)
+Please find the main IPython notebook file for this project [here](https://github.com/ahmadesh/CarND-Vehicle-Detection/blob/master/Project.ipynb).
 
 ---
 ### Writeup / README
